@@ -105,6 +105,7 @@ aside {
 }
 #details article:first-child > p {
 	margin-bottom: 0;
+	text-align: center;
 }
 #details article:nth-child(n + 2) {
 	padding-top: 10px;
@@ -130,6 +131,10 @@ aside {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+}
+#details article > ul {
+	list-style-type: none;
+	padding-bottom: 10px;
 }
 #details i {
 	font-size: 200%;
