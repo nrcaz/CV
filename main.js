@@ -6,6 +6,16 @@ let expClick = false;
 let skillClick = false;
 let formationClick = false;
 
+let mobile = false;
+let contentWidth = '300px';
+if (innerWidth < 500) mobile = true;
+if (mobile) {
+	$('#exp').hide();
+	$('#skill').hide();
+	$('#formation').hide();
+	$('#details').hide().fadeIn();
+}
+
 // color variables
 let defaultSectionColor = '#e8e8e9';
 let hoverSectionColor = '#cdedd8';
@@ -17,6 +27,36 @@ green : #cdedd8
 blue : #c0e3f2
 red : #f4cfce
 */
+
+// MARGIN TOP MAIN ACCORDING TO NAVBAR
+let navExpand = false;
+let headerHeight = $('header').height();
+
+$('main').css({
+	marginTop : headerHeight + 50
+});
+$('header nav > button').css({
+	height : 41.25
+});
+$('header nav > button').on('click', function(e) {
+	if (!navExpand) {
+		navExpand = true;
+		$('main').animate(
+			{
+				marginTop : 222.25 + 50
+			},
+			300
+		);
+	} else {
+		navExpand = false;
+		$('main').animate(
+			{
+				marginTop : headerHeight + 50
+			},
+			300
+		);
+	}
+});
 
 // handle active on page load
 $('.nav-link').on('click', function() {
@@ -123,14 +163,17 @@ function activateClickEvent() {
 	if (!expClick) {
 		$('#exp').on('click', function(e) {
 			e.preventDefault();
+			if (innerWidth < 500) mobile = true;
+			else mobile = false;
 			window.scrollTo(0, 0);
 			$('#skill').hide();
 			$('#formation').hide();
+			if (mobile) $('#details').hide();
 			$('#center').css({
-				marginRight : '20px'
+				marginRight : `${mobile ? '0px' : '20px'}`
 			});
 			$('#exp').css({
-				width           : '750px',
+				width           : `${mobile ? contentWidth : '750px'}`,
 				cursor          : 'default',
 				backgroundColor : defaultSectionColor
 			});
@@ -143,15 +186,17 @@ function activateClickEvent() {
 	}
 	if (!skillClick) {
 		$('#skill').on('click', function(e) {
-			console.log(skillClick);
 			e.preventDefault();
+			if (innerWidth < 500) mobile = true;
+			else mobile = false;
 			window.scrollTo(0, 0);
 			$('#exp').hide();
 			$('#formation').hide();
+			if (mobile) $('#details').hide();
 			$('#skill').css({
-				width           : '500px',
-				paddingLeft     : '100px',
-				paddingRight    : '100px',
+				width           : `${mobile ? contentWidth : '500px'}`,
+				paddingLeft     : `${mobile ? '10px' : '100px'}`,
+				paddingRight    : `${mobile ? '10px' : '100px'}`,
 				cursor          : 'default',
 				backgroundColor : defaultSectionColor
 			});
@@ -174,14 +219,17 @@ function activateClickEvent() {
 	if (!formationClick) {
 		$('#formation').on('click', function(e) {
 			e.preventDefault();
+			if (innerWidth < 500) mobile = true;
+			else mobile = false;
 			window.scrollTo(0, 0);
 			$('#skill').hide();
 			$('#exp').hide();
+			if (mobile) $('#details').hide();
 			$('#center').css({
-				marginRight : '20px'
+				marginRight : `${mobile ? '0px' : '20px'}`
 			});
 			$('#formation').css({
-				width           : '750px',
+				width           : `${mobile ? contentWidth : '750px'}`,
 				cursor          : 'default',
 				backgroundColor : defaultSectionColor
 			});
@@ -200,14 +248,17 @@ activateClickEvent();
 function activateClickExp() {
 	$('[href="#exp"]').on('click', function(e) {
 		e.preventDefault();
+		if (innerWidth < 500) mobile = true;
+		else mobile = false;
 		window.scrollTo(0, 0);
 		$('#skill').hide();
 		$('#formation').hide();
+		if (mobile) $('#details').hide();
 		$('#center').css({
-			marginRight : '20px'
+			marginRight : `${mobile ? '0px' : '20px'}`
 		});
 		$('#exp').css({
-			width           : '750px',
+			width           : `${mobile ? contentWidth : '750px'}`,
 			cursor          : 'default',
 			backgroundColor : defaultSectionColor
 		});
@@ -221,6 +272,16 @@ function activateClickExp() {
 			fontWeight : '200'
 		});
 		lastClicked = null;
+
+		// collapase navbar on click
+		navExpand = false;
+		$('.navbar-collapse').removeClass('show').fadeOut();
+		$('main').css(
+			{
+				marginTop : headerHeight + 50
+			},
+			300
+		);
 	});
 }
 activateClickExp();
@@ -228,13 +289,16 @@ activateClickExp();
 function activateClickSkill() {
 	$('[href="#skill"]').on('click', function(e) {
 		e.preventDefault();
+		if (innerWidth < 500) mobile = true;
+		else mobile = false;
 		window.scrollTo(0, 0);
 		$('#exp').hide();
 		$('#formation').hide();
+		if (mobile) $('#details').hide();
 		$('#skill').css({
-			width           : '500px',
-			paddingLeft     : '100px',
-			paddingRight    : '100px',
+			width           : `${mobile ? contentWidth : '500px'}`,
+			paddingLeft     : `${mobile ? '10px' : '100px'}`,
+			paddingRight    : `${mobile ? '10px' : '100px'}`,
 			cursor          : 'default',
 			backgroundColor : defaultSectionColor
 		});
@@ -245,6 +309,16 @@ function activateClickSkill() {
 		skillClick = true;
 		$('#skill').off('click mouseenter mouseleave');
 		$('[href="#skill"]').off('mouseenter mouseleave');
+
+		// collapase navbar on click
+		navExpand = false;
+		$('.navbar-collapse').removeClass('show').fadeOut();
+		$('main').css(
+			{
+				marginTop : headerHeight + 50
+			},
+			300
+		);
 	});
 }
 activateClickSkill();
@@ -252,14 +326,17 @@ activateClickSkill();
 function activateClickFormation() {
 	$('[href="#formation"]').on('click', function(e) {
 		e.preventDefault();
+		if (innerWidth < 500) mobile = true;
+		else mobile = false;
 		window.scrollTo(0, 0);
 		$('#skill').hide();
 		$('#exp').hide();
+		if (mobile) $('#details').hide();
 		$('#center').css({
-			marginRight : '20px'
+			marginRight : `${mobile ? '0px' : '20px'}`
 		});
 		$('#formation').css({
-			width           : '500px',
+			width           : `${mobile ? contentWidth : '500px'}`,
 			cursor          : 'default',
 			backgroundColor : defaultSectionColor
 		});
@@ -273,12 +350,24 @@ function activateClickFormation() {
 			fontWeight : '200'
 		});
 		lastClicked = null;
+
+		// collapase navbar on click
+		navExpand = false;
+		$('.navbar-collapse').removeClass('show').fadeOut();
+		$('main').css(
+			{
+				marginTop : headerHeight + 50
+			},
+			300
+		);
 	});
 }
 activateClickFormation();
 
 $('#index').on('click', function(e) {
 	e.preventDefault();
+	if (innerWidth < 500) mobile = true;
+	else mobile = false;
 	window.scrollTo(0, 0);
 	// cancel css
 	document.querySelector('#exp').style.width = '500px';
@@ -301,12 +390,20 @@ $('#index').on('click', function(e) {
 		backgroundColor : defaultSectionColor
 	});
 	$('#center').css({
-		marginRight : '20px'
+		marginRight : `${mobile ? '0px' : '20px'}`
 	});
 	// display
-	$('#exp').hide().fadeIn();
-	$('#skill').hide().fadeIn();
-	$('#formation').hide().fadeIn();
+	if (mobile) {
+		$('#exp').hide();
+		$('#skill').hide();
+		$('#formation').hide();
+		$('#details').hide().fadeIn();
+	} else {
+		$('#exp').hide().fadeIn();
+		$('#skill').hide().fadeIn();
+		$('#formation').hide().fadeIn();
+		$('#details').hide().fadeIn();
+	}
 	// reset Click variables
 	expClick = false;
 	formationClick = false;
@@ -320,6 +417,16 @@ $('#index').on('click', function(e) {
 		fontWeight : '200'
 	});
 	lastClicked = null;
+
+	// collapase navbar on click
+	navExpand = false;
+	$('.navbar-collapse').removeClass('show').fadeOut();
+	$('main').css(
+		{
+			marginTop : headerHeight + 50
+		},
+		300
+	);
 });
 
 // handle icons

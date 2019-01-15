@@ -30,6 +30,7 @@ header {
 	position: fixed;
 	width: 100%;
 	top: 0;
+	z-index: 10;
 }
 /* nav */
 nav.navbar {
@@ -45,9 +46,9 @@ nav.navbar {
 /* MAIN */
 /***************************/
 main {
-	margin: 100px auto 50px auto;
-	width: 1040px;
+	margin: 0 auto 50px auto;
 	display: flex;
+	width: 1040px;
 }
 aside {
 	display: flex;
@@ -88,6 +89,9 @@ aside {
 /***************************/
 #details {
 	margin-right: 20px;
+}
+#details h6 {
+	text-align: center;
 }
 #details img {
 	width: 200px;
@@ -172,3 +176,33 @@ aside {
 /***************************/
 /* FORMATIONS */
 /***************************/
+
+@media screen and (max-width: 500px) {
+	#skill {
+		display: none;
+	}
+	#exp {
+		display: none;
+	}
+	#formation {
+		display: none;
+	}
+	#details {
+		margin-right: 0px;
+	}
+	main {
+		justify-content: center;
+		width: 100%;
+	}
+	header .navbar-nav {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+	}
+	.navbar-nav > a.nav-link {
+		margin-right: 0;
+	}
+	#center {
+		margin-right: 0px;
+	}
+}
