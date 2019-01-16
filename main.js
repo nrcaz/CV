@@ -6,16 +6,6 @@ let expClick = false;
 let skillClick = false;
 let formationClick = false;
 
-let mobile = false;
-let contentWidth = '300px';
-if (innerWidth < 500) mobile = true;
-if (mobile) {
-	$('#exp').hide();
-	$('#skill').hide();
-	$('#formation').hide();
-	$('#details').hide().fadeIn();
-}
-
 // color variables
 let defaultSectionColor = '#e8e8e9';
 let hoverSectionColor = '#cdedd8';
@@ -27,6 +17,34 @@ green : #cdedd8
 blue : #c0e3f2
 red : #f4cfce
 */
+
+// MOBILE RESPONSIVE
+let mobile = false;
+let contentWidth = '300px';
+if (innerWidth < 500) mobile = true;
+if (mobile) {
+	$('#exp').hide();
+	$('#skill').hide();
+	$('#formation').hide();
+	$('#details').hide().fadeIn();
+}
+// position of title
+if (mobile) {
+	$('#titleMobile').css({
+		left : innerWidth / 2 - $('#titleMobile').width() / 2,
+		top  : $('header').height() / 2 - $('#titleMobile').height() / 3
+	});
+}
+// event on orientation change
+addEventListener('orientationchange', function(e) {
+	$('#titleMobile').css({
+		left : screen.width / 2 - $('#titleMobile').width() / 2,
+		top  : $('header').height() / 2 - $('#titleMobile').height() / 2
+	});
+	if (innerWidth > 500) mobile = true;
+	else mobile = false;
+	home();
+});
 
 // MARGIN TOP MAIN ACCORDING TO NAVBAR
 let navExpand = false;
@@ -43,7 +61,7 @@ $('header nav > button').on('click', function(e) {
 		navExpand = true;
 		$('main').animate(
 			{
-				marginTop : 222.25 + 50
+				marginTop : 180 + 50
 			},
 			300
 		);
@@ -268,20 +286,22 @@ function activateClickExp() {
 		$('[href="#exp"]').off('mouseenter mouseleave');
 		// Clear Skill Selected
 		$('#skill article:first-of-type > p, .framework').css({
-			color      : '#919aa1',
+			color      : grey6,
 			fontWeight : '200'
 		});
 		lastClicked = null;
 
 		// collapase navbar on click
-		navExpand = false;
-		$('.navbar-collapse').removeClass('show').fadeOut();
-		$('main').css(
-			{
-				marginTop : headerHeight + 50
-			},
-			300
-		);
+		if (mobile) {
+			navExpand = false;
+			$('.navbar-collapse').removeClass('show').fadeOut();
+			$('main').css(
+				{
+					marginTop : headerHeight + 50
+				},
+				300
+			);
+		}
 	});
 }
 activateClickExp();
@@ -311,14 +331,16 @@ function activateClickSkill() {
 		$('[href="#skill"]').off('mouseenter mouseleave');
 
 		// collapase navbar on click
-		navExpand = false;
-		$('.navbar-collapse').removeClass('show').fadeOut();
-		$('main').css(
-			{
-				marginTop : headerHeight + 50
-			},
-			300
-		);
+		if (mobile) {
+			navExpand = false;
+			$('.navbar-collapse').removeClass('show').fadeOut();
+			$('main').css(
+				{
+					marginTop : headerHeight + 50
+				},
+				300
+			);
+		}
 	});
 }
 activateClickSkill();
@@ -346,32 +368,29 @@ function activateClickFormation() {
 		$('[href="#formation"]').off('mouseenter mouseleave');
 		// Clear Skill Selected
 		$('#skill article:first-of-type > p, .framework').css({
-			color      : '#919aa1',
+			color      : grey6,
 			fontWeight : '200'
 		});
 		lastClicked = null;
 
 		// collapase navbar on click
-		navExpand = false;
-		$('.navbar-collapse').removeClass('show').fadeOut();
-		$('main').css(
-			{
-				marginTop : headerHeight + 50
-			},
-			300
-		);
+		if (mobile) {
+			navExpand = false;
+			$('.navbar-collapse').removeClass('show').fadeOut();
+			$('main').css(
+				{
+					marginTop : headerHeight + 50
+				},
+				300
+			);
+		}
 	});
 }
 activateClickFormation();
 
-$('#index').on('click', function(e) {
-	e.preventDefault();
-	if (innerWidth < 500) mobile = true;
-	else mobile = false;
+function home() {
 	window.scrollTo(0, 0);
 	// cancel css
-	document.querySelector('#exp').style.width = '500px';
-	document.querySelector('#formation').style.width = '500px';
 	$('#skill').css({
 		width           : '250px',
 		paddingLeft     : '10px',
@@ -413,20 +432,47 @@ $('#index').on('click', function(e) {
 	activateClickEvent();
 	// Clear Skill Selected
 	$('#skill article:first-of-type > p, .framework').css({
-		color      : '#919aa1',
+		color      : grey6,
 		fontWeight : '200'
 	});
 	lastClicked = null;
+}
 
+// click on "CV" or Title
+$('#index').on('click', function(e) {
+	e.preventDefault();
+	if (innerWidth < 500) mobile = true;
+	else mobile = false;
+	home();
 	// collapase navbar on click
-	navExpand = false;
-	$('.navbar-collapse').removeClass('show').fadeOut();
-	$('main').css(
-		{
-			marginTop : headerHeight + 50
-		},
-		300
-	);
+	if (mobile) {
+		navExpand = false;
+		$('.navbar-collapse').removeClass('show').fadeOut();
+		$('main').css(
+			{
+				marginTop : headerHeight + 50
+			},
+			300
+		);
+	}
+});
+
+$('#titleMobile').on('click', function(e) {
+	e.preventDefault();
+	if (innerWidth < 500) mobile = true;
+	else mobile = false;
+	home();
+	// collapase navbar on click
+	if (mobile) {
+		navExpand = false;
+		$('.navbar-collapse').removeClass('show').fadeOut();
+		$('main').css(
+			{
+				marginTop : headerHeight + 50
+			},
+			300
+		);
+	}
 });
 
 // handle icons
