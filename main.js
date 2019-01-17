@@ -477,7 +477,7 @@ $('#titleMobile').on('click', function(e) {
 
 // handle icons
 $('.fa-gamepad').on('click', function() {
-	open('http://nicholas-rossette.epizy.com/mario-portfolio/');
+	open('https://nrcaz.github.io/mario-portfolio/');
 });
 $('.fa-git-square').on('click', function() {
 	open('https://github.com/nrcaz?tab=repositories');
