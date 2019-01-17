@@ -477,7 +477,7 @@ $('#titleMobile').on('click', function(e) {
 
 // handle icons
 $('.fa-gamepad').on('click', function() {
-	open('https://nrcaz.github.io/mario-portfolio/');
+	open('https://nrcaz.github.io/Mario-Portfolio/');
 });
 $('.fa-git-square').on('click', function() {
 	open('https://github.com/nrcaz?tab=repositories');
