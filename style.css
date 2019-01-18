@@ -37,6 +37,11 @@ header {
 nav.navbar {
 	padding: 0.5rem;
 }
+nav.navbar i {
+	margin-right: 1rem;
+	font-size: 200%;
+	color: grey;
+}
 #navbarNavAltMarkup {
 	text-align: center;
 }
@@ -222,6 +227,11 @@ aside {
 		position: fixed;
 	}
 	#index {
+		display: none;
+	}
+}
+@media screen and (max-width: 600px){
+	header > nav.navbar > a {
 		display: none;
 	}
 }
