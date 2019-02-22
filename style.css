@@ -187,11 +187,17 @@ aside {
 .framework {
 	padding-left: 40px;
 }
+.framework p:first-of-type {
+	margin-top: 1rem;
+}
 /***************************/
 /* FORMATIONS */
 /***************************/
 
 @media screen and (max-width: 500px) {
+	header nav button {
+		display: none;
+	}
 	#skill {
 		display: none;
 	}
@@ -224,13 +230,14 @@ aside {
 	}
 	#titleMobile {
 		display: block;
-		position: fixed;
+		margin: 0 auto;
+		padding: 1rem;
 	}
 	#index {
 		display: none;
 	}
 }
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
 	header > nav.navbar > a {
 		display: none;
 	}

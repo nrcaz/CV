@@ -500,12 +500,12 @@ $('.fa-envelope').on('click', function() {
 // SKILLS FOCUS : future github link on click
 ///////////////////////////////////////////////
 let lastClicked = null;
-$('#skill article:first-of-type > p, .framework').on('mouseenter', function() {
+$('#skill article:first-of-type > p, .framework > p').on('mouseenter', function() {
 	// on click
 	if (skillClick) {
 		$(this).on('click', function() {
-			$('#skill article:first-of-type > p, .framework').off('click');
-			$('#skill article:first-of-type > p, .framework').css({
+			$('#skill article:first-of-type > p, .framework > p').off('click');
+			$('#skill article:first-of-type > p, .framework > p').css({
 				color      : grey6,
 				fontWeight : '200'
 			});
@@ -523,8 +523,8 @@ $('#skill article:first-of-type > p, .framework').on('mouseenter', function() {
 		cursor     : 'pointer'
 	});
 	// hover out
-	$('#skill article:first-of-type > p, .framework').on('mouseleave', function() {
-		$('#skill article:first-of-type > p, .framework').css({
+	$('#skill article:first-of-type > p, .framework > p').on('mouseleave', function() {
+		$('#skill article:first-of-type > p, .framework > p').css({
 			color      : grey6,
 			fontWeight : '200'
 		});
@@ -536,3 +536,77 @@ $('#skill article:first-of-type > p, .framework').on('mouseenter', function() {
 		}
 	});
 });
+
+// SWAP EVENTS
+let linkCV = document.querySelector('#index');
+let linkFormation = document.querySelector('[href="#formation"]');
+let linkExp = document.querySelector('[href="#exp"]');
+let linkSkill = document.querySelector('[href="#skill"]');
+let mainElement = document.querySelector('main');
+let touchPoints = [];
+let page = 1;
+let timeOut;
+let swap = false;
+
+function handleTouchStart(e) {
+	touchPoints = e.touches;
+}
+
+function handleTouchEnd(e) {
+	touchPoints = [];
+	swap = false;
+}
+
+function handleTouchMove(e) {
+	let touchMoved = e.changedTouches;
+	let swapSide = '';
+
+	if (!swap) {
+		if (touchPoints.length > 0) {
+			if (
+				touchMoved[0].screenY < touchPoints[0].screenY + 25 &&
+				touchMoved[0].screenY > touchPoints[0].screenY - 25
+			) {
+				if (touchMoved[0].screenX > touchPoints[0].screenX + 25) {
+					swapSide = 'Right';
+					swap = true;
+				}
+				if (touchMoved[0].screenX < touchPoints[0].screenX - 25) {
+					swapSide = 'Left';
+					swap = true;
+				}
+			}
+		}
+
+		touchPoints = touchMoved;
+
+		if (swap) {
+			if (swapSide === 'Right') {
+				page--;
+				if (page === 0) page = 4;
+			}
+			if (swapSide === 'Left') {
+				page++;
+				if (page === 5) page = 1;
+			}
+			switch (page) {
+				case 1:
+					linkCV.click();
+					break;
+				case 2:
+					linkSkill.click();
+					break;
+				case 3:
+					linkExp.click();
+					break;
+				case 4:
+					linkFormation.click();
+					break;
+			}
+		}
+	}
+}
+
+mainElement.addEventListener('touchstart', handleTouchStart);
+mainElement.addEventListener('touchmove', handleTouchMove);
+mainElement.addEventListener('touchend', handleTouchEnd);
