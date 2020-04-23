@@ -9,6 +9,7 @@
 	--grey5: #bfbfbf;
 	--grey6: #6a6a6a;
 	--green: #4bbf73;
+	--red: #e66735;
 	--black1: #1a1a1a;
 	--orange1: #fbe8cd;
 	--blue1: #c0e3f2;
@@ -131,8 +132,11 @@ aside {
 #details article:nth-child(3) > p {
 	padding-bottom: 10px;
 }
-#details article:nth-child(3) i {
-	color: var(--green);
+.fa-check-square { 
+  color: var(--green);
+}
+.fa-times-circle { 
+  color: var(--red);
 }
 #details article:nth-child(2n) i {
 	background-color: var(--grey3);
